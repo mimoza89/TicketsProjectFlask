@@ -1,4 +1,5 @@
 from db import db
+from models.enums import RoleType
 
 
 class User(db.Model):
@@ -11,3 +12,8 @@ class User(db.Model):
     favourite_genres = db.Column(db.String(255))
     city = db.Column(db.String(20), nullable=False)
     card_number = db.Column(db.Integer)
+    role = db.Column(
+        db.Enum(RoleType),
+        default = RoleType.simple_user,
+        nullable=False,
+    )
