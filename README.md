@@ -4,3 +4,5 @@ This is an app about concerts. Unauthorized guests can only see the upcoming con
 This is a flask app.
 
 You can start it on port http://127.0.0.1:5000
+
+Please first install the packages in requirements.txt file.
