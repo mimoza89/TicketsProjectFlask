@@ -11,9 +11,10 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     favourite_genres = db.Column(db.String(255))
     city = db.Column(db.String(20), nullable=False)
-    card_number = db.Column(db.Integer)
     role = db.Column(
         db.Enum(RoleType),
         default = RoleType.simple_user,
         nullable=False,
     )
+    purchased_tickets = db.Column(db.Integer)
+    card_number = db.Column(db.String(16))

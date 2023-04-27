@@ -8,7 +8,7 @@ class UserSignUpRequestSchema(Schema):
     password = fields.String(required=True)
     favourite_genres = fields.String()
     city = fields.String(required=True)
-    card_number = fields.Integer()
+    card_number = fields.String()
 
 class UserSignInRequestSchema(Schema):
     email = fields.Email(required=True)
