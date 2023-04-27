@@ -50,3 +50,17 @@ class ConcertManager:
         db.session.delete(concert)
         db.session.commit()
         return (f"The concert {concert.title} of {concert.artist} is deleted successfully!")
+
+
+    @staticmethod
+    def get_concert_details(pk):
+        concert = Concert.query.filter_by(id=pk).first()
+        if not concert:
+            raise BadRequest("Concert with such id does not exist!")
+        return concert
+
+
+    @staticmethod
+    def get_own_concerts(host_id):
+        concerts = Concert.query.filter_by(hosted_by=host_id).all()
+        return concerts

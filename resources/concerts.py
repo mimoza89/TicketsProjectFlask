@@ -1,5 +1,6 @@
 from flask import request
 from flask_restful import Resource
+from werkzeug.exceptions import Forbidden
 
 from managers.auth import auth
 from managers.concerts import ConcertManager
@@ -40,3 +41,22 @@ class ConcertDeleteResource(Resource):
     def delete(self, pk):
         concert = ConcertManager.delete_a_concert(pk)
         return concert
+
+
+class ConcertDetailsResource(Resource):
+    @auth.login_required()
+    def get(self, pk):
+        concert = ConcertManager.get_concert_details(pk)
+        return ConcertResponseSchema().dump(concert)
+
+class OwnConcertsResource(Resource):
+    @auth.login_required()
+    @permission_required(RoleType.host)
+    def get(self, host_id):
+        user = auth.current_user()
+
+        if host_id != auth.current_user().id:
+            raise Forbidden("You do not have permission to access this resource!")
+
+        concerts = ConcertManager.get_own_concerts(host_id)
+        return ConcertResponseSchema(many=True).dump(concerts)

@@ -56,3 +56,8 @@ class PurchaseManager:
         user = auth.current_user()
         purchases = Purchase.query.filter_by(user_id=user.id).all()
         return purchases
+
+    @staticmethod
+    def get_all_purchases():
+        purchases = Purchase.query.filter_by().all()
+        return purchases

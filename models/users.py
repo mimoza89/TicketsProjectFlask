@@ -17,4 +17,3 @@ class User(db.Model):
         nullable=False,
     )
     purchased_tickets = db.Column(db.Integer)
-    card_number = db.Column(db.String(16))
