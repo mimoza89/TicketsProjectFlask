@@ -20,7 +20,7 @@ class ProductionConfig:
 class DevelopmentConfig:
     FLASK_ENV = "development"
     DEBUG = True
-    TESTING = True
+    TESTING = False
     SQLALCHEMY_DATABASE_URI = (
         f"postgresql://{config('DB_USER')}:{config('DB_PASSWORD')}"
         f"@localhost:{config('DB_PORT')}/{config('DB_NAME')}"
@@ -29,8 +29,8 @@ class DevelopmentConfig:
 
 class TestingConfig:
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = f"postgresql://{config('DB_USER')}:{config('DB_PASSWORD')}@" \
-                              f"localhost:{config('DB_PORT')}/{config('TEST_DB_NAME')}"
+    SQLALCHEMY_DATABASE_URI = f"postgresql://{config('DB_USER')}:{config('DB_PASSWORD')}" \
+                              f"@localhost:{config('DB_PORT')}/{config('TEST_DB_NAME')}"
     DEBUG = True
 
 

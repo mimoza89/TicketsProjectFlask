@@ -22,7 +22,7 @@ class UserFactory(BaseFactory):
     first_name = factory.Faker("first_name")
     last_name = factory.Faker("last_name")
     email = factory.Faker("email")
-    favourite_genres = factory.Faker("favourite_genres")
+    #favourite_genres = factory.Faker("favourite_genres")
     city = factory.Faker("city")
     purchased_tickets = 0
     password = factory.Faker("password")
@@ -43,7 +43,7 @@ class ConcertFactory(BaseFactory):
     artist = "Mocked artist"
     price = 150
     created_at = "2023-04-27"
-
+    hosted_by = factory.LazyFunction(get_user_id)
 
 def get_concert_id():
     return ConcertFactory().id
@@ -54,9 +54,8 @@ class PurchaseFactory(BaseFactory):
         model = Purchase
 
     id = factory.Sequence(lambda n: n)
-    user_id = mock_uuid()
-    concert_id = mock_uuid()
+    user_id = factory.LazyFunction(get_user_id)
+    concert_id = factory.LazyFunction(get_concert_id)
     quantity = 1
-    amount = 20
     created_at = "2023-04-27"
     status = PurchaseStatus.pending

@@ -21,6 +21,7 @@ class PurchaseResource(Resource):
 
 class OwnPurchasesResource(Resource):
     @auth.login_required()
+    @permission_required(RoleType.simple_user)
     def get(self):
         purchases = PurchaseManager.get_own_purchases()
         return PurchaseResponseSchema(many=True).dump(purchases)
